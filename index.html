@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الأعمال الشخصي | طالبة رياضيات - جامعة العلوم والتكنولوجيا الأردنية</title>
+    <!-- خطوط جوجل وحزم الأيقونات -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --accent-gold: #fbbf24;
+            --accent-blue: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* خلفية أنيميشن رموزه رياضية */
+        .math-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .math-symbol {
+            position: absolute;
+            color: var(--accent-blue);
+            font-size: 2rem;
+            animation: float 15s infinite linear;
+            font-weight: bold;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* الهيدر والترويسة */
+        header {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .profile-badge {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        h1.name {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        h2.title {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .student-id {
+            background: var(--bg-card);
+            padding: 0.5rem 1.4rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        /* الحاويات والأقسام */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            display: block;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            width: 50%;
+            height: 4px;
+            background: var(--accent-gold);
+            border-radius: 2px;
+        }
+
+        /* البطاقات الشبكية */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 1.8rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.15);
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* مهارات الرياضيات والتقنية */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-blue);
+            color: var(--bg-primary);
+            font-weight: bold;
+            transform: scale(1.05);
+        }
+
+        /* الفوتر والتواصل */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: #090d16;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            transform: translateY(-4px);
+        }
+
+        /* الأنيماشن */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- رموز رياضية متطايرة في الخلفية -->
+    <div class="math-bg" id="mathBg"></div>
+
+    <!-- ترويسة الموقع -->
+    <header>
+        <div class="profile-badge"><i class="fa-solid fa-graduation-cap"></i> طالبة بكالوريوس رياضيات | JUST</div>
+        <h1 class="name">تخصص الرياضيات التطبيقية والبحتة</h1>
+        <h2 class="title">جامعة العلوم والتكنولوجيا الأردنية (JUST)</h2>
+        <div class="student-id">
+            <i class="fa-solid fa-microchip"></i> علم البيانات والتحليل الرياضي | Data Science & Mathematics
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- قسم النبذة -->
+        <section>
+            <h2 class="section-title">نبذة عني</h2>
+            <div class="card">
+                <p>طالبة رياضيات في جامعة العلوم والتكنولوجيا الأردنية، شغوفة بالتحليل الرياضي، التفكير المنطقي، وربط النظريات الرياضية بعلم البيانات وحل المشكلات المعقدة. حاصلة على شهادات تدريبية في أساسيات علم البيانات (Data Science) من منصة Cisco Networking Academy.</p>
+            </div>
+        </section>
+
+        <!-- قسم المهارات والأدوات -->
+        <section>
+            <h2 class="section-title">المهارات والاهتمامات الاكاديمية</h2>
+            <div class="skills-container">
+                <div class="skill-tag"><i class="fa-solid fa-square-root-variable"></i> التحليل الرياضي والتفاضل (Real Analysis)</div>
+                <div class="skill-tag"><i class="fa-solid fa-diagram-project"></i> الجبر المجرد والخطّي (Abstract & Linear Algebra)</div>
+                <div class="skill-tag"><i class="fa-solid fa-chart-line"></i> التوبولوجيا والرياضيات البحتة (Topology)</div>
+                <div class="skill-tag"><i class="fa-solid fa-laptop-code"></i> علم البيانات والبرمجة (Data Science)</div>
+                <div class="skill-tag"><i class="fa-solid fa-calculator"></i> المعادلات التفاضلية (Differential Equations)</div>
+                <div class="skill-tag"><i class="fa-solid fa-brain"></i> بحوث العمليات والبرمجة الخطية (Operations Research)</div>
+                <div class="skill-tag"><i class="fa-solid fa-chart-pie"></i> الإحصاء والاحتمالات</div>
+            </div>
+        </section>
+
+        <!-- قسم المجالات الأكاديمية -->
+        <section>
+            <h2 class="section-title">المجالات الدراسية</h2>
+            <div class="grid-cards">
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-calculator"></i></div>
+                    <h3>الرياضيات البحتة</h3>
+                    <p>دراسة البُنى الرياضية والنظريات الأساسية مثل الجبر والتوبولوجيا والتحليل الحقيقي للوصول للبراهين المنطقية.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <h3>علم البيانات والتحليل</h3>
+                    <p>تطبيق الخوارزميات والنماذج الإحصائية والرياضية لمعالجة وتحليل البيانات واستخراج حلول قيّمة.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <h3>بحوث العمليات والتحسين</h3>
+                    <p>استخدام البرمجة الخطية والنماذج الحسابية لتحسين الأداء واتخاذ القرارات الأكاديمية والعملية الأمثل.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- الفوتر مع روابط التواصل -->
+    <footer>
+        <p>© 2026 جميع الحقوق محفوظة | معرض الأعمال الشخصي</p>
+        <div class="social-links">
+            <a href="#" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" title="البريد الإلكتروني"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+    </footer>
+
+    <!-- سكريبت لتوليد الرموز الرياضية المتحركة -->
+    <script>
+        const symbols = ['∫', '∑', 'π', '√', '∞', 'Δ', 'θ', 'λ', 'f(x)', '≈', '≠', '∈'];
+        const mathBg = document.getElementById('mathBg');
+
+        for (let i = 0; i < 25; i++) {
+            const span = document.createElement('span');
+            span.className = 'math-symbol';
+            span.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+            span.style.left = `${Math.random() * 100}%`;
+            span.style.animationDuration = `${10 + Math.random() * 10}s`;
+            span.style.animationDelay = `${Math.random() * 5}s`;
+            span.style.fontSize = `${1.2 + Math.random() * 1.5}rem`;
+            mathBg.appendChild(span);
+        }
+    </script>
+</body>
+</html>
